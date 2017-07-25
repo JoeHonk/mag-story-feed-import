@@ -1,0 +1,141 @@
+id:                             my_rss_importer
+label:                          'Mag Story rss feed importer'
+status:                         true
+
+source:
+  plugin:                       url
+  data_fetcher_plugin:          http
+  urls:                         'http://mag.uchicago.edu/mag-story-feed1'
+  data_parser_plugin:           simple_xml
+
+  item_selector:                /rss/channel/item
+  fields:
+    -
+      name:	Title
+      label:	title
+      selector:	title
+    -
+      name:	Issue
+      label:	field_issue
+      selector:	field_issue
+    -
+      name:	Author
+      label:	field_refauthors
+      selector:	field_refauthors
+    -
+      name:	Formats
+      label:	field_refformats
+      selector:	field_refformats
+    -
+      name:	Publication Sources
+      label:	field_refsource
+      selector:	 field_refsource
+    -
+      name:	External Story Link
+      label:	field_story_ext_link
+      selector:	field_story_ext_link
+    -
+      name:	Topic
+      label:	field_reftopic
+      selector:	field_reftopic
+    -
+      name:	UChicago Specific
+      label:	field_refuchicago
+      selector:	field_refuchicago
+    -
+      name:	Tags
+      label:	field_tags
+      selector:	field_tags
+    -
+      name:	Story Image
+      label:	field_letter_box_story_image
+      selector:	field_letter_box_story_image
+    -
+      name:	Caption
+      label:	field_caption
+      selector:	field_caption
+    -
+      name:	Homepage Image
+      label:	field_storyimage
+      selector:	field_storyimage
+    -
+      name:	Subhead
+      label:	field_subhead
+      selector:	field_subhead
+    -
+      name:	URL path settings
+      label:	path
+      selector:	path
+    -
+      name:	Body
+      label:	body
+      selector:	body
+    -
+      name:	Related Stories
+      label:	field_relatedstories
+      selector:	field_relatedstories
+    -
+      name:	Related Links
+      label:	field_relatedlinks
+      selector:	field_relatedlinks
+    -
+      name:	Sidebar Content
+      label:	field_sidebar_content
+      selector:	field_sidebar_content
+    -
+      name:	Multimedia type
+      label:	field_storymediatype
+      selector:	field_storymediatype
+    -
+      name:	Media
+      label:	field_storymedia
+      selector:	field_storymedia
+    -
+      name:	URL redirects
+      label:	redirect
+      selector:	redirect
+
+
+
+  ids:
+    guid:
+      type:                     string
+
+destination:
+  plugin:                       'entity:node'
+
+process:
+  title:                        title
+  field_issue	:	field_issue
+  field_refauthors:	field_refauthors
+  field_refformats:	field_refformats
+  field_refsource:	field_refsource
+  field_story_ext_link:	field_story_ext_link
+  field_reftopic:	field_reftopic
+  field_refuchicago:	field_refuchicago
+  field_tags:	field_tags
+  field_letter_box_story_image:	field_letter_box_story_image
+  field_caption:	field_caption
+  field_storyimage:	field_storyimage
+  field_subhead:	field_subhead
+  path:	path
+  body:	body
+  field_relatedstories:	field_relatedstories
+  field_relatedlinks:	field_relatedlinks
+  field_sidebar_content:	field_sidebar_content
+  field_storymediatype:	field_storymediatype
+  field_storymedia:	field_storymedia
+
+
+
+  created:
+    plugin:                     format_date
+    from_format:                'D, d M Y H:i:s O'
+    to_format:                  'U'
+    source:                     pub_date
+  status:
+    plugin:                     default_value
+    default_value:              1
+  type:
+    plugin:                     default_value
+    default_value:              story
